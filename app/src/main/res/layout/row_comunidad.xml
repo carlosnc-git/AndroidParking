@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:tools="http://schemas.android.com/tools" xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:onClick="clickComunidad"
+                                    card_view:cardCornerRadius="24dp"
+                                    card_view:cardElevation="1dp"
+                                    card_view:cardUseCompatPadding="false"
+                                    card_view:contentPadding="10dp"
+                                    card_view:cardBackgroundColor="@android:color/holo_blue_light">
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content">
+        <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/ivComunidad" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toTopOf="parent" card_view:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvComunidad" card_view:layout_constraintStart_toEndOf="@+id/ivComunidad"
+                android:layout_marginStart="24dp" android:layout_marginBottom="8dp"
+                card_view:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                card_view:layout_constraintTop_toTopOf="parent" android:textStyle="bold" android:textSize="24sp"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="net.azarquiel.examenandroid.view.ProvinciasActivity">
+    <item
+            android:id="@+id/sbTapas"
+            android:icon="@drawable/ic_search_black_24dp"
+            app:showAsAction="always"
+            android:title="@string/buscar_municipio"
+            app:actionViewClass="android.support.v7.widget.SearchView"/>
+</menu>

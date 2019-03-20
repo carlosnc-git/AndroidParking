@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadUser()
         loginWithLastUser()
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        //get community list, the it's given to the adapter
+        //get the Comunidad list, then it's given to the adapter
         viewModel.getComunidades().observe(this, Observer {
             it?.let(adapter::setComunidades)
         })
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
     }
-    //loads the last user from sharedpreferences, if the user hasn't logged out
+    //loads the Usuario saved in the sharedpreference, if not null
     private fun loginWithLastUser() {
         val user = preferencias.getString("usuario", null)
         usuario = null
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadUser()
             }
     }
-    //loads the username into the drawer
+    //loads the nick parameter from usuario into the drawer
     private fun loadUser(){
         val nickAvatar = nav_view.getHeaderView(0).tvUser
         usuario?.let{ it -> nickAvatar.text = it.nick
@@ -97,14 +97,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }.show()
     }
-
+    //register
     private fun okRegister(pass: String, nick: String){
+        //if any paramer is empty, the alert with show up again
         if (pass.isEmpty() || nick.isEmpty()){
             alert ("Rellena todos los parámetros"){
                 okButton { register() }
                 cancelButton {  }
             }.show()
         } else {
+            //if parameters are ok it tries to register the user
             var newUsuario = Usuario(nick = nick,pass = pass)
             viewModel.saveUsuario(newUsuario).observe( this, Observer {
                 it?.let { toast("Usuario registrado exitosamente") }?:let { toast("Error registrando usuario")  }
@@ -129,16 +131,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }.show()
     }
-
+    //login
     private fun okLogin(pass : String, nick : String){
+        //tries to get an Usuario that matches pass and nick
         viewModel.getUsuario(nick, pass).observe( this, Observer {
             var mensaje = ""
-            it?.let { it -> usuario = it
+            //if successfull it saves the Usuario into the sharedpreferences
+            it?.let {
+                usuario = it
                 loadUser()
                 val editor = preferencias.edit()
                 editor.putString("usuario", Gson().toJson(usuario))
                 editor.commit()
                 mensaje = "Iniciada sesión como ${it.nick}" }?: let { mensaje = "Usuario no encontrado o contraseña incorrecta" }
+            //depending of the result the message will vary
             toast(mensaje)
         })
     }
@@ -148,7 +154,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         rvComunidades.layoutManager = LinearLayoutManager(this)
         rvComunidades.adapter = adapter
     }
-    //onclick listener for each row in the recyclerview
+    //onclick method for each row/viewholder
     fun clickComunidad(view: View){
         val intent = Intent(this, ProvinciasActivity::class.java)
         intent.putExtra("comunidad", (view.tag as Comunidad))
@@ -182,7 +188,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
+    //logout, sets usuario to null and removes it from the sharedpreferences
     private fun logout() {
         usuario = null
         loadUser()

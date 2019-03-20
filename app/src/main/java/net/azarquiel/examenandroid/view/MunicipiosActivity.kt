@@ -39,21 +39,22 @@ class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         title = "Municipios (${provincia.nombre})"
         loadAdapter()
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //gets the list of Municipios for the given Provincia, saves it for filtering and gives it to the adapter
         viewModel.getMunicipios(provincia.id).observe(this, Observer {
-            it?.let{it-> municipios=it
+            it?.let{
+                municipios=it
                 adapter.setMunicipios(municipios)
             }
         })
     }
-
+    //initialize the adapter
     private fun loadAdapter() {
         adapter = CustomAdapterMunicipios(this, R.layout.row_municipio)
         rvMunicipios.layoutManager = LinearLayoutManager(this)
         rvMunicipios.adapter = adapter
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflates the menu with the searchview
         menuInflater.inflate(R.menu.menu_municipios, menu)
         val searchItem = menu.findItem(R.id.sbTapas)
         searchView = searchItem.actionView as SearchView
@@ -61,7 +62,7 @@ class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         searchView.setOnQueryTextListener(this)
         return true
     }
-
+    //filters the list municipios to only show those which match the given string
     private fun filtrar(filtro:String){
         adapter.setMunicipios(municipios.filter { m -> m.nombre.toUpperCase().contains(filtro.toUpperCase())})
     }
@@ -74,7 +75,7 @@ class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
-
+    //onclick action for each row/viewholder
     fun clickMunicipio(view: View){
         val intent = Intent(this, LugaresActivity::class.java)
         intent.putExtra("municipio", (view.tag as Municipio))

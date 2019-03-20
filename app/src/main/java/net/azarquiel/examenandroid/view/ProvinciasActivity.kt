@@ -31,17 +31,18 @@ class ProvinciasActivity : AppCompatActivity() {
         title = "Provincias (${comunidad.nombre})"
         loadAdapter()
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //gets the list of Provincia of a Comunidad, gives it to the adapter
         viewModel.getProvincias(comunidad.id).observe(this, Observer {
             it?.let(adapter::setProvincias)
         })
     }
-
+    //initialize the adapter
     private fun loadAdapter(){
         adapter = CustomAdapterProvincias(this, R.layout.row_provincia)
         rvProvincias.layoutManager = LinearLayoutManager(this)
         rvProvincias.adapter = adapter
     }
-
+    //onclick method for each row/viewholder
     fun clickProvincia(view: View){
         val intent = Intent(this, MunicipiosActivity::class.java)
         intent.putExtra("provincia", (view.tag as Provincia))

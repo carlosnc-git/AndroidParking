@@ -31,20 +31,22 @@ class LugaresActivity : AppCompatActivity() {
         title = "Lugares (${municipio.nombre})"
         loadAdapter()
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //gets the Lugares list for the given Municipio and passes them to the adapter
         viewModel.getLugares(latitud = municipio.latitud, longitud = municipio.longitud).observe(this, Observer {
             it?.let(adapter::setLugares)
         })
     }
-
+    //initialize the adapter
     private fun loadAdapter() {
         adapter = CustomAdapterLugares(this, R.layout.row_lugar)
         rvLugares.layoutManager = LinearLayoutManager(this)
         rvLugares.adapter = adapter
     }
-
+    //onclick action for each row/viewholder
     fun clickLugar(view: View){
-        val intent = Intent(this, LugarActivity::class.java)
+        //only if user is logged (so usuario!=null) will be able to navigate to the new activity
         usuario?.let {
+            val intent = Intent(this, LugarActivity::class.java)
             intent.putExtra("lugar", (view.tag as Lugar))
             intent.putExtra("usuario", usuario)
             startActivity(intent)

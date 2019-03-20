@@ -30,7 +30,7 @@ class LugarActivity : AppCompatActivity() {
         lugar = intent.getSerializableExtra("lugar") as Lugar
         usuario = intent.getSerializableExtra("usuario") as Usuario
         title = lugar.titre
-        tvLugarNombre.text = lugar.titre
+        tvLugarNombre.text = lugar.titre+"  "+lugar.id
         tvLugarDescripcion.text = lugar.description_es
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         //get images
@@ -43,10 +43,15 @@ class LugarActivity : AppCompatActivity() {
                     var lp = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT
                     )
+                    //adds margin at each side of the generated view,in my experience it does not work with dp
+                    //the view for the first image won't have left margin
                     if (i!=1) lp.marginStart=20
+                    //the view for the last image won't have right margin
                     if (i!=it.size) lp.marginEnd=20
                     iv.layoutParams = lp
-                    Picasso.with(this).load(foto.link_large).placeholder(R.drawable.placeholder).fit().centerInside().into(iv)
+                    //for picasso to use WRAP_CONTENT or MATCH_PARENT, the view has to first contain an image
+                    //as a workaround, a placeholder its used, it has to be larger in width/height than the loaded image AFTER resizing, as I understand
+                    Picasso.with(this).load(foto.link_large).placeholder(R.drawable.bigplaceholder).fit().centerInside().into(iv)
                     sv.llLugar.addView(iv)
                     i++
                 }
@@ -62,11 +67,11 @@ class LugarActivity : AppCompatActivity() {
             }
         )
     }
-    //rate current place
+    //rate current Lugar
     fun puntuar(view: View){
         viewModel.getPuntos(lugar.id).observe(this, Observer {
             it?.let {
-                //checks if the place has already been rated
+                //checks if the Lugar has already been rated
                 if (it.any { p -> p.usuario==usuario.id }){
                     toast("Ya has puntuado este lugar")
                 }else{

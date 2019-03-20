@@ -12,107 +12,77 @@ import net.azarquiel.examenandroid.api.WebAccess
 class MainRepository(application: Application) {
     val service = WebAccess.caravanService
 
-    fun getComunidades(): LiveData<List<Comunidad>> {
-        var result = MutableLiveData<List<Comunidad>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getComunidades().await()
-            if (webResponse.isSuccessful) {
-                result.value = webResponse.body()!!.comunidades as ArrayList<Comunidad>
-            }
+    suspend fun getComunidades(): List<Comunidad> {
+        val webResponse = service.getComunidades().await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.comunidades
         }
-        return result
+        return emptyList()
     }
-    fun getProvincias(id: Int): LiveData<List<Provincia>> {
-        var result = MutableLiveData<List<Provincia>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getProvincias(id).await()
-            if (webResponse.isSuccessful) {
-                result.value = webResponse.body()!!.provincias as ArrayList<Provincia>
-            }
+    suspend fun getProvincias(id: Int): List<Provincia> {
+        val webResponse = service.getProvincias(id).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.provincias
         }
-        return result
+        return emptyList()
     }
-    fun getMunicipios(id: Int): LiveData<List<Municipio>> {
-        var result = MutableLiveData<List<Municipio>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getMunicipios(id).await()
-            if (webResponse.isSuccessful) {
-                result.value = webResponse.body()!!.municipios as ArrayList<Municipio>
-            }
+    suspend fun getMunicipios(id: Int): List<Municipio> {
+        val webResponse = service.getMunicipios(id).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.municipios
         }
-        return result
+        return emptyList()
     }
-    fun saveUsuario(usuario: Usuario): LiveData<Usuario> {
-        var userResponse = MutableLiveData<Usuario>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.saveUsuario(usuario).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.usuario
-            }
+    suspend fun saveUsuario(usuario: Usuario): Usuario? {
+        val webResponse = service.saveUsuario(usuario).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.usuario
         }
-        return userResponse
+        return null
     }
-    fun getUsuario(nick: String, pass: String): LiveData<Usuario> {
-        var userResponse = MutableLiveData<Usuario>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getUsuario(nick,pass).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.usuario
-            }
+    suspend fun getUsuario(nick: String, pass: String): Usuario? {
+        val webResponse = service.getUsuario(nick,pass).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.usuario
         }
-        return userResponse
+        return null
     }
-    fun getLugares(latitud: Double, longitud: Double): LiveData<List<Lugar>> {
-        var userResponse = MutableLiveData<List<Lugar>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getLugares(latitud=latitud,longitud = longitud).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.lieux
-            }
+    suspend fun getLugares(latitud: Double, longitud: Double): List<Lugar> {
+        val webResponse = service.getLugares(latitud=latitud,longitud = longitud).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.lieux
         }
-        return userResponse
+        return emptyList()
     }
-    fun getFotos(id: Int): LiveData<List<Foto>> {
-        var userResponse = MutableLiveData<List<Foto>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getFotos(id).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.p4n_photos
-            }
+    suspend fun getFotos(id: Int): List<Foto> {
+        val webResponse = service.getFotos(id).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.p4n_photos
         }
-        return userResponse
+        return emptyList()
     }
-    fun getAvg(id: Int): LiveData<Double> {
-        var userResponse = MutableLiveData<Double>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getAvg(id).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.avg
-            }
+    suspend fun getAvg(id: Int): Double? {
+        val webResponse = service.getAvg(id).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.avg
         }
-        return userResponse
+        return null
     }
 
-    fun savePunto(idlugar: Int, idusuario: Int, puntos:Int): LiveData<Punto> {
-        var userResponse = MutableLiveData<Punto>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.savePunto(idlugar, idusuario, puntos).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.punto
-            }
+    suspend fun savePunto(idlugar: Int, idusuario: Int, puntos:Int): Punto? {
+        val webResponse = service.savePunto(idlugar, idusuario, puntos).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.punto
         }
-        return userResponse
+        return null
     }
 
-    fun getPuntos(id: Int): LiveData<List<Punto>> {
-        var userResponse = MutableLiveData<List<Punto>>()
-        GlobalScope.launch(Dispatchers.Main) {
-            val webResponse = service.getPuntos(id).await()
-            if (webResponse.isSuccessful) {
-                userResponse.value = webResponse.body()!!.puntos
-            }
+    suspend fun getPuntos(id: Int): List<Punto> {
+        val webResponse = service.getPuntos(id).await()
+        if (webResponse.isSuccessful) {
+            return webResponse.body()!!.puntos
         }
-        return userResponse
+        return emptyList()
     }
 
 

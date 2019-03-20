@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loadUser()
         loginWithLastUser()
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //get community list, the it's given to the adapter
         viewModel.getComunidades().observe(this, Observer {
             it?.let(adapter::setComunidades)
         })
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
     }
-
+    //loads the last user from sharedpreferences, if the user hasn't logged out
     private fun loginWithLastUser() {
         val user = preferencias.getString("usuario", null)
         usuario = null
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 loadUser()
             }
     }
+    //loads the username into the drawer
     private fun loadUser(){
         val nickAvatar = nav_view.getHeaderView(0).tvUser
         usuario?.let{ it -> nickAvatar.text = it.nick
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
     }
-
+    //call for register dialog, if possitive then tries to register
     private fun register(){
         alert {
             customView {
@@ -109,7 +111,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             })
         }
     }
-
+    //call for login dialog, if possitive then tries to login
     private fun login(){
         alert {
             customView {
@@ -140,13 +142,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             toast(mensaje)
         })
     }
-
+    //initialize the adapter
     private fun loadAdapter(){
         adapter = CustomAdapterComunidades(this, R.layout.row_comunidad)
         rvComunidades.layoutManager = LinearLayoutManager(this)
         rvComunidades.adapter = adapter
     }
-
+    //onclick listener for each row in the recyclerview
     fun clickComunidad(view: View){
         val intent = Intent(this, ProvinciasActivity::class.java)
         intent.putExtra("comunidad", (view.tag as Comunidad))

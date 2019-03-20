@@ -33,19 +33,26 @@ class LugarActivity : AppCompatActivity() {
         tvLugarNombre.text = lugar.titre
         tvLugarDescripcion.text = lugar.description_es
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        //get images
         viewModel.getFotos(lugar.id).observe(this, Observer {
             it?.let{
+                //control variable for current image
+                var i=1
                 for (foto in it) {
                     var iv = ImageView(this)
                     var lp = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT
                     )
+                    if (i!=1) lp.marginStart=20
+                    if (i!=it.size) lp.marginEnd=20
                     iv.layoutParams = lp
                     Picasso.with(this).load(foto.link_large).placeholder(R.drawable.placeholder).fit().centerInside().into(iv)
                     sv.llLugar.addView(iv)
+                    i++
                 }
             }
         })
+        //get average rating
         viewModel.getAvg(lugar.id).observe(this, Observer {
             it?.let{
                 var num = it.toInt()
@@ -55,19 +62,21 @@ class LugarActivity : AppCompatActivity() {
             }
         )
     }
+    //rate current place
     fun puntuar(view: View){
         viewModel.getPuntos(lugar.id).observe(this, Observer {
             it?.let {
+                //checks if the place has already been rated
                 if (it.any { p -> p.usuario==usuario.id }){
                     toast("Ya has puntuado este lugar")
                 }else{
+                    //if not it submits the rate
                     viewModel.savePuntos(lugar.id,usuario.id,Integer.parseInt(view.tag as String)).observe(this, Observer {
                         it?.let{
                             toast("Puntos añadidos correctamente")
                             this.finish()
                         }?:let { toast("Error añadiendo puntos") }
-                    }
-                    )
+                    })
                 }
             }
         })

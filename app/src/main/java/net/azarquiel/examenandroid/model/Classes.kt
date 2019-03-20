@@ -47,5 +47,6 @@ data class Respuesta (
     var lieux: List<Lugar>,
     var p4n_photos: List<Foto>,
     var avg: Double,
-    var punto: Punto
+    var punto: Punto,
+    var puntos: List<Punto>
 ): Serializable

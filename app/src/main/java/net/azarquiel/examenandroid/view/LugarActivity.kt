@@ -56,12 +56,21 @@ class LugarActivity : AppCompatActivity() {
         )
     }
     fun puntuar(view: View){
-        viewModel.savePuntos(lugar.id,usuario.id,Integer.parseInt(view.tag as String)).observe(this, Observer {
-            it?.let{
-               toast("Puntos añadidos correctamente")
-                this.finish()
-            }?:let { toast("Error añadiendo puntos") }
-        }
-        )
+        viewModel.getPuntos(lugar.id).observe(this, Observer {
+            it?.let {
+                if (it.any { p -> p.usuario==usuario.id }){
+                    toast("Ya has puntuado este lugar")
+                }else{
+                    viewModel.savePuntos(lugar.id,usuario.id,Integer.parseInt(view.tag as String)).observe(this, Observer {
+                        it?.let{
+                            toast("Puntos añadidos correctamente")
+                            this.finish()
+                        }?:let { toast("Error añadiendo puntos") }
+                    }
+                    )
+                }
+            }
+        })
+
     }
 }

@@ -104,6 +104,17 @@ class MainRepository(application: Application) {
         return userResponse
     }
 
+    fun getPuntos(id: Int): LiveData<List<Punto>> {
+        var userResponse = MutableLiveData<List<Punto>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            val webResponse = service.getPuntos(id).await()
+            if (webResponse.isSuccessful) {
+                userResponse.value = webResponse.body()!!.puntos
+            }
+        }
+        return userResponse
+    }
+
 
 
 

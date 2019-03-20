@@ -45,4 +45,8 @@ class MainViewModel (application: Application) : AndroidViewModel(application) {
         return repository.savePunto(idlugar, idusuario, puntos)
     }
 
+    fun getPuntos(id: Int): LiveData<List<Punto>>{
+        return repository.getPuntos(id)
+    }
+
 }

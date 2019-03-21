@@ -10,4 +10,4 @@ if any province is pressed other activity will display with near parking sites. 
 places and it will show you the details of the clicked place on a new activity; it includes images, some description and the user rating 
 this place has (you can submit your rating using the different faces, once done it will return the user to the previous activity)
 
-P.S: I hope my English doesn't make your eyes bleed
+P.S: English is not my mother tongue; please excuse any errors on my part.

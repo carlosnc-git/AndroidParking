@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_lugar.view.*
-import kotlinx.android.synthetic.main.row_municipio.view.*
 import net.azarquiel.examenandroid.model.Lugar
-import net.azarquiel.examenandroid.model.Municipio
 
 class CustomAdapterLugares(val context: Context,
                               val layout: Int

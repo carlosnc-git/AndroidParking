@@ -1,21 +1,19 @@
 package net.azarquiel.examenandroid.view
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_provincias.*
-import kotlinx.android.synthetic.main.content_main.*
-import net.azarquiel.examenandroid.R
-import net.azarquiel.examenandroid.adapter.CustomAdapterComunidades
-import net.azarquiel.examenandroid.adapter.CustomAdapterProvincias
-import net.azarquiel.examenandroid.viewmodel.MainViewModel
-import android.arch.lifecycle.Observer
-import android.content.Intent
 import android.view.View
+import kotlinx.android.synthetic.main.activity_provincias.*
+import net.azarquiel.examenandroid.R
+import net.azarquiel.examenandroid.adapter.CustomAdapterProvincias
 import net.azarquiel.examenandroid.model.Comunidad
 import net.azarquiel.examenandroid.model.Provincia
 import net.azarquiel.examenandroid.model.Usuario
+import net.azarquiel.examenandroid.viewmodel.MainViewModel
 
 class ProvinciasActivity : AppCompatActivity() {
 

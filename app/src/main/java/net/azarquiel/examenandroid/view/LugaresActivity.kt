@@ -1,21 +1,19 @@
 package net.azarquiel.examenandroid.view
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import net.azarquiel.examenandroid.R
-import net.azarquiel.examenandroid.adapter.CustomAdapterMunicipios
-import net.azarquiel.examenandroid.viewmodel.MainViewModel
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_lugares.*
-import kotlinx.android.synthetic.main.content_main.*
-import net.azarquiel.examenandroid.adapter.CustomAdapterComunidades
+import net.azarquiel.examenandroid.R
 import net.azarquiel.examenandroid.adapter.CustomAdapterLugares
-import net.azarquiel.examenandroid.model.*
+import net.azarquiel.examenandroid.model.Lugar
+import net.azarquiel.examenandroid.model.Municipio
+import net.azarquiel.examenandroid.model.Usuario
+import net.azarquiel.examenandroid.viewmodel.MainViewModel
 import org.jetbrains.anko.toast
 
 class LugaresActivity : AppCompatActivity() {

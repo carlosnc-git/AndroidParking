@@ -4,15 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.activity_municipios.*
-import kotlinx.android.synthetic.main.activity_provincias.*
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_municipios.*
 import net.azarquiel.examenandroid.R
 import net.azarquiel.examenandroid.adapter.CustomAdapterMunicipios
@@ -20,7 +17,6 @@ import net.azarquiel.examenandroid.model.Municipio
 import net.azarquiel.examenandroid.model.Provincia
 import net.azarquiel.examenandroid.model.Usuario
 import net.azarquiel.examenandroid.viewmodel.MainViewModel
-import org.jetbrains.anko.toast
 
 class MunicipiosActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 

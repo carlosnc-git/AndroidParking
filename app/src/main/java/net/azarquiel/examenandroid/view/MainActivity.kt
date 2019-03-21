@@ -1,34 +1,30 @@
 package net.azarquiel.examenandroid.view
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
+import android.text.InputType.TYPE_CLASS_TEXT
+import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.view.MenuItem
 import android.view.View
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import net.azarquiel.examenandroid.viewmodel.MainViewModel
-import android.arch.lifecycle.Observer
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.text.InputType
-import android.text.InputType.TYPE_CLASS_TEXT
-import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-import android.widget.Toast
-import com.google.gson.Gson
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import net.azarquiel.examenandroid.R
 import net.azarquiel.examenandroid.adapter.CustomAdapterComunidades
 import net.azarquiel.examenandroid.model.Comunidad
 import net.azarquiel.examenandroid.model.Usuario
+import net.azarquiel.examenandroid.viewmodel.MainViewModel
 import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

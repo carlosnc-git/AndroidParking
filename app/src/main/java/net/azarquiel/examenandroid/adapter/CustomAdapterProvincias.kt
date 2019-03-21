@@ -5,11 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.row_comunidad.view.*
 import kotlinx.android.synthetic.main.row_provincia.view.*
-import net.azarquiel.examenandroid.model.Comunidad
 import net.azarquiel.examenandroid.model.Provincia
-import org.jetbrains.anko.imageResource
 
 class CustomAdapterProvincias(val context: Context,
                                val layout: Int

@@ -10,7 +10,7 @@
                                     card_view:cardElevation="1dp"
                                     card_view:cardUseCompatPadding="false"
                                     card_view:contentPadding="10dp"
-                                    card_view:cardBackgroundColor="@android:color/holo_blue_light">
+                                    card_view:cardBackgroundColor="@android:color/darker_gray">
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content">
 
